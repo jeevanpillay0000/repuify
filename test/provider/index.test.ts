@@ -1,28 +1,26 @@
 'use strict'
 import { expect } from 'chai'
-import { ThorProvider } from '../../src/provider'
+import { RepuProvider } from '../../src/provider'
 
 describe('thor-provider initialization', () => {
 
     it('should throw error if called without empty host', () => {
-        expect(() => { const provider = new ThorProvider(''); return provider }).to.throw('[thor-provider]Thorify requires that the host be specified(e.g. "http://localhost:8669")')
+        expect(() => { const provider = new RepuProvider(''); return provider }).to.throw('[thor-provider]Thorify requires that the host be specified(e.g. "http://localhost:8669")')
     })
 
     it('should parse url', () => {
-        const provider = new ThorProvider('http://localhost:8669')
+        const provider = new RepuProvider('http://localhost:8669')
         expect(provider).to.have.property('RESTHost', 'http://localhost:8669')
-        expect(provider).to.have.property('WSHost', 'ws://localhost:8669')
     })
 
     it('should parse url with https', () => {
-        const provider = new ThorProvider('https://localhost:8669')
+        const provider = new RepuProvider('https://localhost:8669')
         expect(provider).to.have.property('RESTHost', 'https://localhost:8669')
-        expect(provider).to.have.property('WSHost', 'wss://localhost:8669')
     })
 
     it('should throw error with wrong', () => {
         expect(() => {
-            return new ThorProvider('invalidurl')
+            return new RepuProvider('invalidurl')
         }).to.throw('[thor-provider]Parsing url failed!')
     })
 
@@ -31,7 +29,7 @@ describe('thor-provider initialization', () => {
 describe('thor-provider methods', () => {
 
     it('not supported method should return error ', (done) => {
-        const provider = new ThorProvider('http://localhost:8669')
+        const provider = new RepuProvider('http://localhost:8669')
         provider.sendAsync({
             method: 'not supported method',
         }, (err, ret) => {
@@ -48,7 +46,7 @@ describe('thor-provider methods', () => {
     })
 
     it('eth_sendTransaction method should throw error', (done) => {
-        const provider = new ThorProvider('http://localhost:8669')
+        const provider = new RepuProvider('http://localhost:8669')
         provider.sendAsync({
             method: 'eth_sendTransaction',
         }, (err, ret) => {
@@ -64,41 +62,4 @@ describe('thor-provider methods', () => {
         })
     })
 
-})
-
-describe('subscriptions', () => {
-
-    it('subscribe an unsupported subscription should return error', (done) => {
-        const provider = new ThorProvider('http://localhost:8669')
-        provider.sendAsync({
-            method: 'eth_subscribe',
-            params: ['unsupported'],
-        }, (err, ret) => {
-            if (err) {
-                done(new Error('Return error in wrong place!'))
-            }
-            if (ret.error) {
-                expect(ret.error.message).to.be.equal('Subscription unsupported not supported!')
-                done()
-            } else {
-                done(new Error('No error thrown!'))
-            }
-        })
-    })
-
-    it('unsubscribe not exist subscription should return true', (done) => {
-        const provider = new ThorProvider('http://localhost:8669')
-        provider.sendAsync({
-            method: 'eth_unsubscribe',
-            params: [100],
-        }, (err, ret) => {
-            try {
-                expect(ret.result).to.be.equal(true)
-                done()
-            } catch (e) {
-              done(e)
-            }
-        })
-    })
-
-})
+});

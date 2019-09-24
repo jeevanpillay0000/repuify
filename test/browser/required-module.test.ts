@@ -1,9 +1,9 @@
 'use strict'
 
 import { expect } from 'chai'
-import { thorify } from '../../src'
+import { repuify } from '../../src'
 const Web3 = require('web3')
-const web3 = thorify(new Web3(), 'http://localhost:8669', 0)
+const web3 = repuify(new Web3(), 'http://localhost:8669', 0)
 
 describe('XHR2: localhost:8669 should not be listened', () => {
     it('call eth methods should throw error', (done) => {

@@ -15,8 +15,8 @@ rewiremock('isomorphic-ws').with(require('./fake-ws'))
 
 rewiremock.enable()
 
-import { thorify } from '../../src'
-const web3 = thorify(new Web3())
+import { repuify } from '../../src'
+const web3 = repuify(new Web3())
 
 export {
     web3,

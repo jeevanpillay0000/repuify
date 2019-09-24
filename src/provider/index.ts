@@ -4,7 +4,6 @@ import { Callback } from '../types'
 const debug = require('debug')('thor:http-provider')
 import { EventEmitter } from 'eventemitter3'
 import WebSocket = require('isomorphic-ws')
-import * as QS from 'querystring'
 import { JSONRPC } from './json-rpc'
 import { RPCExecutor, RPCMethodMap } from './rpc-methods'
 

@@ -431,62 +431,6 @@ describe('web3.eth', () => {
 
 })
 
-describe('web3.eth.Contract', () => {
-
-    it('call method', async () => {
-        xhrUtility.setResponse({
-            data: '0x000000000000000000000000000000000000000003663fde3f5cc2921e0d7593',
-        })
-        const result = await contract.methods.balanceOf('0xd3ae78222beadb038203be21ed5ce7c9b1bff602').call()
-        const { url, body } = xhrUtility.extractRequest()
-
-        expect(url).to.be.equal('/accounts/0x0000000000000000000000000000456e65726779?revision=best')
-        expect(result).to.be.equal('1052067071896070588235347347')
-        expect(body).to.have.property('data', '0x70a08231000000000000000000000000d3ae78222beadb038203be21ed5ce7c9b1bff602')
-    })
-
-    it('estimateGas method', async () => {
-        xhrUtility.setResponse({
-            gasUsed: 870,
-        })
-        const result = await contract.methods.balanceOf('0xd3ae78222beadb038203be21ed5ce7c9b1bff602').estimateGas()
-        const { url, body } = xhrUtility.extractRequest()
-
-        expect(url).to.be.equal('/accounts/0x0000000000000000000000000000456e65726779?revision=best')
-        expect(body).to.have.property('data', '0x70a08231000000000000000000000000d3ae78222beadb038203be21ed5ce7c9b1bff602')
-        expect(result).to.be.equal(23724)
-    })
-
-    it('getPastLogs', async () => {
-        xhrUtility.setResponse([{
-            address: '0x0000000000000000000000000000456e65726779',
-            topics:
-                ['0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef',
-                    '0x000000000000000000000000d3ae78222beadb038203be21ed5ce7c9b1bff602',
-                    '0x0000000000000000000000007567d83b7b8d80addcb281a71d54fc7b3364ffed'],
-            data: '0x0000000000000000000000000000000000000000000000000000000000000001',
-            meta:
-            {
-                blockID: '0x0000005b0f386bdd9b677993f52a1a3c76445df49781d9c111a70ecacff63169',
-                blockNumber: 91,
-                blockTimestamp: 1536747051,
-                txID: '0x405611a6ba2f9a5f45b81a899f2c15f87c7938dcc01589a9f2981c7609dc153a',
-                txOrigin: '0xd3ae78222beadb038203be21ed5ce7c9b1bff602',
-            },
-            blockNumber: 91,
-            blockHash: '0x0000005b0f386bdd9b677993f52a1a3c76445df49781d9c111a70ecacff63169',
-            transactionHash: '0x405611a6ba2f9a5f45b81a899f2c15f87c7938dcc01589a9f2981c7609dc153a',
-        }])
-        const result = await contract.getPastEvents('Transfer', { filter: { _from: '0x7567d83b7b8d80addcb281a71d54fc7b3364ffed' } })
-        const { url } = xhrUtility.extractRequest()
-
-        expect(url).to.be.equal('/logs/events?address=0x0000000000000000000000000000456e65726779')
-        expect(result.length).to.be.equal(1)
-        expect(result[0]).to.have.all.keys('address', 'blockHash', 'blockNumber', 'event', 'meta', 'raw', 'returnValues', 'signature', 'transactionHash')
-    })
-
-})
-
 describe('web3.eth:error handling', () => {
     beforeEach(() => {
         xhrUtility.resetMockData()

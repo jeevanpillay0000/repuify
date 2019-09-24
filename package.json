@@ -8,7 +8,7 @@
         "build": "tsc -p .",
         "lint": "tslint  --fix -p .",
         "prepare": "rm -rf dist/; npm run build",
-        "test": "NODE_ENV=test mocha --require ts-node/register/transpile-only --timeout 20000 --recursive  --exclude './test/browser/*.ts' './**/*.test.ts'",
+        "test": "NODE_ENV=test mocha --require ts-node/register/transpile-only --timeout 20000  --exclude './test/browser/*.ts' './test/test-utils/**.test.ts'",
         "cover": "NODE_ENV=test nyc npm t",
         "coverall": "NODE_ENV=test nyc npm t && nyc report --reporter=text-lcov | coveralls",
         "test:browser": "TS_NODE_PROJECT=\"test/browser/tsconfig.webpack.json\" webpack --config test/browser/webpack.test.config.ts && open test/browser/index.html"
