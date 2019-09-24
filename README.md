@@ -60,29 +60,28 @@ web3.eth.getBlock("latest").then(res => console.log(res));
 // Best block info will be displayed
 ```
 
-## Web3 method supported
+## Current
 
 ```
 web3 instance
 ├── eth
 │   ├── getBlockNumber
-│   ├── getBalance
-│   ├── getStorageAt
-│   ├── getCode
 │   ├── getBlock
 │   ├── getTransaction
-│   ├── getTransactionReceipt
 │   ├── sendTransaction
 │   ├── sendSignedTransaction
+│   ├── getChainTag
+│   ├── getBlockRef
+│   ├── getTransactionReceipt
+│   ├── getCode
+│   ├── getBalance
+│   ├── getStorageAt
 │   ├── call
-│   ├── estimateGas
 │   ├── getPastLogs
 │   ├── subscribe
 │   ├── clearSubscriptions
 │   ├── getEnergy
-│   ├── getChainTag
-│   ├── getBlockRef
-│   ├── accounts
+│   ├── estimateGas
 │   └── Contract
 │       ├── Constructor(new Contract())
 │       ├── clone
@@ -99,6 +98,20 @@ web3 instance
 │       └── getPastEvents
 └── utils
 
+```
+
+## RepuCoin
+
+However, in RepuCoin, the structure is different from Ethereum's and Vechain's block structure, whereby, blocks are differentiated by two different types. Microblocks and Keyblocks.
+
+```
+RepuCoin web3 instance
+├── eth
+│   ├── getKeyblock
+│   ├── getMicroblock
+│   ├── getTransaction
+│   ├── sendTransaction
+│   ├── sendSignedTransaction
 ```
 
 ## Send Transaction
@@ -121,36 +134,6 @@ The APIs that follows the mechanism are:
 1. [thor-devkit.js](https://github.com/vechain/thor-devkit.js) supports multi-clause and sign transaction
 2. send signed transaction using [sendSignedTransaction](https://thorify.vecha.in/#/?id=send-signed-transaction)
 
-## Which Stack Should I Choose Regarding Connex,Thorify And Web3-Gear
-
-+ [Connex](https://github.com/vechain/connex#connex-): The standard interface to connect VeChain apps with VeChain blockchain and user.
-+ [Web3-Gear](https://github.com/vechain/web3-gear#web3-gear): Proxy Thor's RESTful API to Eth's JSON-RPC, to support Remix, Truffle and more.
-
-Below is an reference when you are planning your technical stack:
-
-![tech-stack](https://raw.githubusercontent.com/vechain/thorify/master/tech-stack.png)
-
-Here are some most common scenarios:
-
-1. Develop a web application(**Recommend**): `Connex` + [Connex powered VeChain wallets](https://env.vechain.org/)
-2. An alternative for web application: `Thorify + Web3` + [Comet](https://env.vechain.org/#comet)
-3. Backend service in Node.js: `Thorify + Web3`
-4. Contract development in [Truffle](https://truffleframework.com/): `Web3 + Web3-Gear`
-5. Contract development in [Remix-IDE](https://remix.ethereum.org/): `Web3 + Web3-Gear`
-
-## FAQ
-
-### How do I send VTHO token
-
-VTHO is a token that compatible with VIP180(ERC-20), you can build a contract instance using `web3` and do what ever you want.
-
-+ [VTHO source code](https://github.com/vechain/thor/blob/master/builtin/gen/energy.sol)
-+ Contract Address: `0x0000000000000000000000000000456E65726779`
-
-### Multi party payment protocol or sponsored contract
-
-It's done by calling the functions of prototype contract, check [wiki page](https://github.com/vechain/thor/wiki/Prototype(EN)) for detailed info about prototype contract.
-
 ### Method not supported
 
 The RESTful API of Thor is different with Ethereum's JSON-RPC, therefore, there are some methods in web3 are not supported by thorify, feel free to open an issue discuss the features.
@@ -170,8 +153,3 @@ DEBUG=thor:* ts-node index.ts
 ```
 
 `ts-node index.ts` can be replaced with command to run your code, this example is only for Node.js environment. For more detailed info, please refer to [debug](https://www.npmjs.com/package/debug).
-
-
-## License
-
-This project is licensed under the MIT license, Copyright (c) 2017 VeChain Foundation. For more information see [LICENSE.md](LICENSE.md).

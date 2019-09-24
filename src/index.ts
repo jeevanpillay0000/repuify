@@ -7,7 +7,8 @@ const thorify = function(web3Instance: any, host = 'http://localhost:8669', time
     const provider = new ThorProvider(host, timeout)
     web3Instance.setProvider(provider)
 
-    extend(web3Instance)
+    // TODO: Add extend methods for the web3Instance, disabled for initial development environment
+    // extend(web3Instance)
 
     return web3Instance
 }
