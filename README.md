@@ -14,18 +14,9 @@ A web3 adaptor for VeChain [Thor](https://github.com/vechain/thor) RESTful API.
 * [Web3 method supported](#web3-method-supported)
 * [Send transaction](#send-transaction)
 * [Documentation](https://thorify.vecha.in)
-* [Play with multi-clause](#play-with-multi-clause)
-* [Which Stack Should I Choose Regarding Connex,Thorify And Web3-Gear](#which-stack-should-i-choose-regarding-connexthorify-and-web3-gear)
-* [FAQ](#faq)
-    * [Web3-Gear vs Thorify](#web3-gear-vs-thorify)
-    * [How do I send VTHO token](#how-do-i-send-vtho-token)
-    * [Multi party payment protocol or sponsored contract](#multi-party-payment-protocol-or-sponsored-contract)
-    * [Method not supported](#method-not-supported)
-    * [Subscriptions support](#subscriptions-support)
 * [Notes](#notes)
 * [Compatibility](#compatibility)
 * [Debugging](#debugging)
-* [License](#License)
 
 ## Install
 
@@ -128,11 +119,6 @@ The APIs that follows the mechanism are:
 ## Documentation
 
 [API Reference](https://thorify.vecha.in/#/?id=api-reference)
-
-## Play with multi-clause
-
-1. [thor-devkit.js](https://github.com/vechain/thor-devkit.js) supports multi-clause and sign transaction
-2. send signed transaction using [sendSignedTransaction](https://thorify.vecha.in/#/?id=send-signed-transaction)
 
 ### Method not supported
 
