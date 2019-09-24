@@ -6,10 +6,9 @@ import { extendFormatters } from './formatters'
 import { extendMethods } from './methods'
 
 const extend = function(web3: any) {
-    extendAccounts(web3)
-    extendFormatters(web3)
+    // TODO: add support for accounts, contracts and formatters
+    // Add extra methods
     extendMethods(web3)
-    extendContracts(web3)
 }
 
 export {

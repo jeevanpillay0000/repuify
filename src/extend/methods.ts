@@ -7,11 +7,11 @@ const extendMethods = function(web3: any) {
         property: 'eth',
         methods: [
             new web3.extend.Method({
-                name: 'getEnergy',
-                call: 'eth_getEnergy',
-                params: 2,
-                inputFormatter: [web3.extend.utils.toAddress, web3.extend.formatters.inputDefaultBlockNumberFormatter],
-                outputFormatter: web3.extend.formatters.outputBigNumberFormatter,
+                name: 'getKeyblock',
+                call: 'eth_getKeyblockByHash',
+                params: 1,
+                inputFormatter: [null],
+                outputFormatter: [null],
             }),
             new web3.extend.Method({
                 name: 'getTransaction',
@@ -21,36 +21,12 @@ const extendMethods = function(web3: any) {
                 outputFormatter: web3.extend.formatters.outputTransactionFormatter,
             }),
             new web3.extend.Method({
-                name: 'getTransactionReceipt',
-                call: 'eth_getTransactionReceipt',
-                params: 1,
-                inputFormatter: [null],
-                outputFormatter: web3.extend.formatters.outputTransactionReceiptFormatter,
-            }),
-            new web3.extend.Method({
                 name: 'sendTransaction',
                 call: 'eth_sendTransaction',
                 accounts: web3.eth.accounts,
                 params: 1,
                 inputFormatter: [web3.extend.formatters.inputTransactionFormatter],
-            }),
-            new web3.extend.Method({
-                name: 'getBlockRef',
-                call: 'eth_getBlockRef',
-                params: 0,
-            }),
-            new web3.extend.Method({
-                name: 'getChainTag',
-                call: 'eth_getChainTag',
-                params: 0,
-            }),
-            new web3.extend.Method({
-                name: 'getPastLogs',
-                call: 'eth_getLogs',
-                params: 1,
-                inputFormatter: [web3.extend.formatters.inputLogFormatter],
-                outputFormatter: web3.extend.formatters.outputLogFormatter,
-            }),
+            })
         ],
     })
 
