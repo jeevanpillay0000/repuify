@@ -1,11 +1,11 @@
 'use strict'
 
 import { extend } from './extend'
-import { ThorProvider } from './provider'
+import { RepuProvider } from './provider'
 
-const thorify = function(web3Instance: any, host = 'http://localhost:8669', timeout = 0) {
+const repuify = function(web3Instance: any, host = 'http://localhost:8669', timeout = 0) {
     // Create the provider instance
-    const provider = new ThorProvider(host, timeout)
+    const provider = new RepuProvider(host, timeout)
 
     // Set web3instance to the new provider
     web3Instance.setProvider(provider)
@@ -14,4 +14,4 @@ const thorify = function(web3Instance: any, host = 'http://localhost:8669', time
     return web3Instance
 }
 
-export { thorify }
+export { repuify }

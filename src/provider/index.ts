@@ -15,10 +15,9 @@ interface Sockets {
     }
 }
 
-class ThorProvider extends EventEmitter {
+class RepuProvider extends EventEmitter {
     private RESTHost: string
     private timeout: number
-
 
     // TODO: enable subscription service, add ManagerSubscription, instantiate subscription svc
     private WSHost: string
@@ -85,5 +84,5 @@ const omitCallBackedPromise = function(callBackedRet: any) {
 }
 
 export {
-    ThorProvider,
+    RepuProvider,
 }
