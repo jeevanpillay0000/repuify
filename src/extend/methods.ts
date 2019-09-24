@@ -1,6 +1,4 @@
 'use strict'
-const Subscriptions = require('web3-core-subscriptions').subscriptions
-import { inputBlockFilterFormatter, inputLogFilterFormatter, inputTransferFilterFormatter } from './formatters'
 
 const extendMethods = function(web3: any) {
     web3.extend({
@@ -28,81 +26,7 @@ const extendMethods = function(web3: any) {
                 inputFormatter: [web3.extend.formatters.inputTransactionFormatter],
             })
         ],
-    })
-
-    // subscriptions
-    const subs = new Subscriptions({
-        name: 'subscribe',
-        type: 'eth',
-        subscriptions: {
-            newBlockHeaders: {
-                subscriptionName: 'newHeads',
-                params: 1,
-                inputFormatter: [inputBlockFilterFormatter],
-                subscriptionHandler(subscriptionMsg: any) {
-                    if (subscriptionMsg.error) {
-                        this.emit('error', subscriptionMsg.error)
-                         // web3-core-subscriptions/subscription sets a default value for this.callback
-                        this.callback(subscriptionMsg.error, null, this)
-                    } else {
-                        const result = web3.extend.formatters.outputBlockFormatter(subscriptionMsg.data)
-                        if (result.removed) {
-                            this.emit('changed', result)
-                        } else {
-                            this.emit('data', result)
-                        }
-                        // web3-core-subscriptions/subscription sets a default value for this.callback
-                        this.callback(null, result, this)
-                    }
-                },
-            },
-            logs: {
-                params: 1,
-                inputFormatter: [inputLogFilterFormatter],
-                subscriptionHandler(subscriptionMsg: any) {
-                    if (subscriptionMsg.error) {
-                        this.emit('error', subscriptionMsg.error)
-                        // web3-core-subscriptions/subscription sets a default value for this.callback
-                        this.callback(subscriptionMsg.error, null, this)
-                    } else {
-                        const result = web3.extend.formatters.outputLogFormatter(subscriptionMsg.data)
-                        if (result.removed) {
-                            this.emit('changed', result)
-                        } else {
-                            this.emit('data', result)
-                        }
-                        // web3-core-subscriptions/subscription sets a default value for this.callback
-                        this.callback(null, result, this)
-                    }
-                },
-            },
-            transfers: {
-                params: 1,
-                inputFormatter: [inputTransferFilterFormatter],
-                subscriptionHandler(subscriptionMsg: any) {
-                    if (subscriptionMsg.error) {
-                        this.emit('error', subscriptionMsg.error)
-                        // web3-core-subscriptions/subscription sets a default value for this.callback
-                        this.callback(subscriptionMsg.error, null, this)
-                    } else {
-                        const result = subscriptionMsg.data
-                        if (result.removed) {
-                            this.emit('changed', result)
-                        } else {
-                            this.emit('data', result)
-                        }
-                        // web3-core-subscriptions/subscription sets a default value for this.callback
-                        this.callback(null, result, this)
-                    }
-                },
-            },
-        },
-    })
-
-    subs.attachToObject(web3.eth)
-    subs.setRequestManager(web3.eth._requestManager)
-
-    web3.eth.clearSubscriptions = web3.eth._requestManager.clearSubscriptions.bind(web3.eth._requestManager)
+    });
 }
 
 export {
