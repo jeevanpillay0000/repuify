@@ -51,15 +51,21 @@ class ThorProvider extends EventEmitter {
         // }
 
         if (RPCMethodMap.has(rpc.method)) {
+            // Create the executor
             const executor = RPCMethodMap.get(rpc.method) as RPCExecutor
+
+            // Execute based on the REST API's
             executor(rpc, this.RESTHost, this.timeout).then((ret) => {
+                // Return
                 debug('response: %O', ret.result)
                 omitCallBackedPromise(callback(null, ret))
                 return
             }).catch((err) => {
+                // Catch errors
                 omitCallBackedPromise(callback(err, null))
                 return
-            })
+            });
+
         } else {
             callback(null, rpc.makeError('[thor-provider]Method not supported!'))
             return
