@@ -25,15 +25,19 @@ class ThorProvider extends EventEmitter {
         super()
         if (!host) { throw new Error('[thor-provider]Thorify requires that the host be specified(e.g. "http://localhost:8669")') }
 
+        // Parse host
         const hostURL = parse(host)
         if (!hostURL.protocol || !hostURL.host) {
             throw new Error('[thor-provider]Parsing url failed!')
         }
 
+        // Initialize variables
         this.RESTHost = `${hostURL.protocol}//${hostURL.host}`
-        this.WSHost = `${hostURL.protocol.replace('http', 'ws')}//${hostURL.host}`
         this.timeout = timeout
-        this.sockets = []
+
+        // TODO: enable subscription service
+        // this.WSHost = `${hostURL.protocol.replace('http', 'ws')}//${hostURL.host}`
+        // this.sockets = []
     }
 
     public sendAsync(payload: any, callback: Callback) {
@@ -73,6 +77,7 @@ class ThorProvider extends EventEmitter {
 
     }
 
+    // TODO: enable managersubcription
     public ManagerSubscription(rpc: JSONRPC, callback: Callback) {
         let query = ''
         if (rpc.method === 'eth_subscribe') {
