@@ -46,9 +46,9 @@ class ThorProvider extends EventEmitter {
         }
 
         // subscriptions
-        if (rpc.method === 'eth_subscribe' || rpc.method === 'eth_unsubscribe') {
-            return this.ManagerSubscription(rpc, callback)
-        }
+        // if (rpc.method === 'eth_subscribe' || rpc.method === 'eth_unsubscribe') {
+        //     return this.ManagerSubscription(rpc, callback)
+        // }
 
         if (RPCMethodMap.has(rpc.method)) {
             const executor = RPCMethodMap.get(rpc.method) as RPCExecutor
