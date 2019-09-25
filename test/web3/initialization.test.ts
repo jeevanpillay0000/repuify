@@ -6,12 +6,12 @@ import { RepuProvider } from '../../src/provider'
 const Web3 = require('web3')
 
 describe('initialization', () => {
-    it('init thorify should not throw error', () => {
+    it('init repuify should not throw error', () => {
         const web3 = new Web3()
         repuify(web3, 'http://localhost:8669', 0)
     })
 
-    it('init thorify without host', () => {
+    it('init repuify without host', () => {
         const web3 = new Web3()
         repuify(web3)
 
@@ -19,7 +19,7 @@ describe('initialization', () => {
         expect(web3.currentProvider).to.have.property('timeout', 0)
     })
 
-    it('init thorify with timeout', () => {
+    it('init repuify with timeout', () => {
         const web3 = new Web3();
         repuify(web3, 'http://localhost:8669', 10)
 
