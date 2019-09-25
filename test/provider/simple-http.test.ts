@@ -1,7 +1,7 @@
 "use strict";
 import { xhrUtility } from "../test-utils/init";
 import { expect } from "chai";
-import { HTTP } from "../../src/provider/simple-http";
+import { HTTP } from "../../src/utils/simple-http";
 
 describe("simple http", () => {
   beforeEach(() => {
