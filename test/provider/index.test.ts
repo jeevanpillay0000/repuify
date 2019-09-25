@@ -2,13 +2,13 @@
 import { expect } from "chai";
 import { RepuProvider } from "../../src/provider";
 
-describe("thor-provider initialization", () => {
+describe("repu-provider initialization", () => {
   it("should throw error if called without empty host", () => {
     expect(() => {
       const provider = new RepuProvider("");
       return provider;
     }).to.throw(
-      '[thor-provider]Thorify requires that the host be specified(e.g. "http://localhost:8669")'
+      '[repu-provider]Repuify requires that the host be specified(e.g. "http://localhost:8669")'
     );
   });
 
@@ -25,11 +25,11 @@ describe("thor-provider initialization", () => {
   it("should throw error with wrong", () => {
     expect(() => {
       return new RepuProvider("invalidurl");
-    }).to.throw("[thor-provider]Parsing url failed!");
+    }).to.throw("[repu-provider]Parsing url failed!");
   });
 });
 
-describe("thor-provider methods", () => {
+describe("repu-provider methods", () => {
   it("not supported method should return error ", done => {
     const provider = new RepuProvider("http://localhost:8669");
     provider.sendAsync(
@@ -42,7 +42,7 @@ describe("thor-provider methods", () => {
         }
         if (ret.error) {
           expect(ret.error.message).to.be.equal(
-            "[thor-provider]Method not supported!"
+            "[repu-provider]Method not supported!"
           );
           done();
         } else {
@@ -64,7 +64,7 @@ describe("thor-provider methods", () => {
         }
         if (ret.error) {
           expect(ret.error.message).to.be.equal(
-            "[thor-provider]The private key corresponding to from filed can't be found in local eth.accounts.wallet!"
+            "[repu-provider]The private key corresponding to from filed can't be found in local eth.accounts.wallet!"
           );
           done();
         } else {

@@ -38,7 +38,7 @@ describe("simple http: error handling", () => {
           expect(() => {
             throw e || "no error";
           }).to.throw(
-            "[thor-provider]Error parsing the response: Unexpected token t in JSON at position 1"
+            "[repu-provider]Error parsing the response: Unexpected token t in JSON at position 1"
           );
           done();
         } catch (err) {
@@ -57,7 +57,7 @@ describe("simple http: error handling", () => {
         try {
           expect(() => {
             throw e || "no error";
-          }).to.throw("[thor-provider]Connect error: send failed");
+          }).to.throw("[repu-provider]Connect error: send failed");
           done();
         } catch (err) {
           done(err);
@@ -76,7 +76,7 @@ describe("simple http: error handling", () => {
           expect(() => {
             throw e || "no error";
           }).to.throw(
-            "[thor-provider]Time out for whatever reason, check your provider"
+            "[repu-provider]Time out for whatever reason, check your provider"
           );
           done();
         } catch (err) {

@@ -31,17 +31,17 @@ export interface RPCSubResult {
     }
 }
 
-const thorifyResult = function(result: any) {
+const repuifyResult = function(result: any) {
     // tricks for compatible with original web3 instance
-    // non-objects or non-arrays doesn't need isThorified property since thorify just overwritten 3 formatters
+    // non-objects or non-arrays doesn't need isrepuified property since repuify just overwritten 3 formatters
     // which all accept object as input
     if (utils.isArray(result)) {
         result = result.map((item: any) => {
-            Object.defineProperty(item, 'isThorified', { get: () => true })
+            Object.defineProperty(item, 'isRepuified', { get: () => true })
             return item
         })
     } else if (utils.isObject(result)) {
-        Object.defineProperty(result, 'isThorified', { get: () => true })
+        Object.defineProperty(result, 'isRepuified', { get: () => true })
     }
     return result
 }
@@ -61,7 +61,7 @@ export class JSONRPC {
         return {
             id: this.id,
             jsonrpc: '2.0',
-            result: thorifyResult(result),
+            result: repuifyResult(result),
         }
     }
 
@@ -82,7 +82,7 @@ export class JSONRPC {
             method: this.method,
             params: {
                 result: {
-                    data: thorifyResult(result),
+                    data: repuifyResult(result),
                 },
                 subscription: this.id,
             },

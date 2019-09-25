@@ -1,11 +1,11 @@
 'use strict'
 import { parse } from 'url'
 import { Callback } from '../types'
-const debug = require('debug')('thor:http-provider')
+const debug = require('debug')('repu:http-provider')
 import { EventEmitter } from 'eventemitter3'
 import WebSocket = require('isomorphic-ws')
 import { JSONRPC } from './json-rpc'
-import { RPCExecutor, RPCMethodMap } from './rpc-methods'
+import { RPCExecutor, RPCMethodMap } from './repu-methods'
 
 interface Sockets {
     [index: number]: {
@@ -24,12 +24,12 @@ class RepuProvider extends EventEmitter {
 
     constructor(host: string, timeout = 0) {
         super()
-        if (!host) { throw new Error('[thor-provider]Thorify requires that the host be specified(e.g. "http://localhost:8669")') }
+        if (!host) { throw new Error('[repu-provider]Repuify requires that the host be specified(e.g. "http://localhost:8669")') }
 
         // Parse host
         const hostURL = parse(host)
         if (!hostURL.protocol || !hostURL.host) {
-            throw new Error('[thor-provider]Parsing url failed!')
+            throw new Error('[repu-provider]Parsing url failed!')
         }
 
         // Initialize variables
@@ -43,7 +43,7 @@ class RepuProvider extends EventEmitter {
 
         // kindly remind developers about the usage about send transaction
         if (rpc.method === 'eth_sendTransaction') {
-            return callback(null, rpc.makeError('[thor-provider]The private key corresponding to from filed can\'t be found in local eth.accounts.wallet!'))
+            return callback(null, rpc.makeError('[repu-provider]The private key corresponding to from filed can\'t be found in local eth.accounts.wallet!'))
         }
 
         // Call
@@ -64,7 +64,7 @@ class RepuProvider extends EventEmitter {
             });
 
         } else {
-            callback(null, rpc.makeError('[thor-provider]Method not supported!'))
+            callback(null, rpc.makeError('[repu-provider]Method not supported!'))
             return
         }
 
