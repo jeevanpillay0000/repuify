@@ -20,7 +20,15 @@ RPCMethodMap.set('eth_getKeyblockByHeight', async function(rpc: JSONRPC, host: s
 })
 
 RPCMethodMap.set('eth_getKeyblockByHash', async function(rpc: JSONRPC, host: string, timeout: number) {
-    const URL = host + '/blocks/' + rpc.params[0]
+    const URL = host + '/keyblocks/' + rpc.params[0]
+
+    const res = await HTTP.get(URL, timeout).then(HTTPPostProcessor)
+
+    return rpc.makeResult(res)
+})
+
+RPCMethodMap.set('eth_getMicroblockByHash', async function(rpc: JSONRPC, host: string, timeout: number) {
+    const URL = host + '/microblocks/' + rpc.params[0]
 
     const res = await HTTP.get(URL, timeout).then(HTTPPostProcessor)
 
