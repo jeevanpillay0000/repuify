@@ -10,8 +10,8 @@ const repuify = function(web3Instance: any, host = 'http://localhost:8669', time
     // Set web3instance to the new provider
     web3Instance.setProvider(provider)
 
-    extend(web3Instance)
-    return web3Instance
+    // Return
+    return extend(web3Instance)
 }
 
 export { repuify }
