@@ -7,7 +7,7 @@ describe('web3.eth', () => {
     beforeEach(() => {
         xhrUtility.resetMockData()
         xhrUtility.clearCachedResponse()
-    })
+    });
 
     it('getBlock without parameter', async () => {
         await web3.eth.getBlock()

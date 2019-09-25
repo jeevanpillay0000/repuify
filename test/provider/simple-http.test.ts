@@ -4,6 +4,11 @@ import { expect } from "chai";
 import { HTTP } from "../../src/provider/simple-http";
 
 describe("simple http", () => {
+  beforeEach(() => {
+    xhrUtility.resetMockData();
+    xhrUtility.clearCachedResponse();
+  });
+
   it("get", async () => {
     HTTP.get("http://localhost:8669/test");
 
