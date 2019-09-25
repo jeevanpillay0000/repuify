@@ -19,7 +19,7 @@ describe('initialization', () => {
         expect(web3.currentProvider).to.have.property('timeout', 0)
     })
 
-    it('providers should be ThorProvider', () => {
+    it('providers should be RepuProvider', () => {
         const web3 = new Web3()
         repuify(web3)
 
