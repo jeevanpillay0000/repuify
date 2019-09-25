@@ -1,10 +1,4 @@
-## Thorify &nbsp;&nbsp; [![Gitter](https://badges.gitter.im/vechain/thor.svg)](https://gitter.im/vechain/thor?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-
-[![NPM Version](https://badge.fury.io/js/thorify.svg)](https://www.npmjs.com/package/thorify)
-[![Build Status](https://travis-ci.org/vechain/thorify.svg)](https://travis-ci.org/vechain/thorify)
-[![Coverage Status](https://coveralls.io/repos/github/vechain/thorify/badge.svg?branch=master)](https://coveralls.io/github/vechain/thorify?branch=master)
-
-A web3 adaptor for VeChain [Thor](https://github.com/vechain/thor) RESTful API.
+A web3 adaptor for RepuCoin's RESTful API.
 
 
 ## Table of contents
@@ -21,7 +15,7 @@ A web3 adaptor for VeChain [Thor](https://github.com/vechain/thor) RESTful API.
 ## Install
 
 ``` bash
-npm install --save thorify
+npm install --save repuify
 npm install --save web3@1.*  # Web3 is needed as dependency.
 ```
 
@@ -29,10 +23,10 @@ npm install --save web3@1.*  # Web3 is needed as dependency.
 
 ``` javascript
 // ES6 style
-import { thorify } from "thorify";
+import { repuify } from "repuify";
 const Web3 = require("web3");		// Recommend using require() instead of import here
 
-const web3 = thorify(new Web3(), "http://localhost:8669");
+const web3 = repuify(new Web3(), "http://localhost:8669");
 
 web3.eth.getBlock("latest").then(res => console.log(res));
 // Best block info will be displayed
@@ -42,53 +36,13 @@ If you would like to write code in ES5, check below for the initialization code.
 
 ``` javascript
 // ES5 style
-const thorify = require("thorify").thorify;
+const repuify = require("repuify").repuify;
 const Web3 = require("web3");
 
-const web3 = thorify(new Web3(), "http://localhost:8669");
+const web3 = repuify(new Web3(), "http://localhost:8669");
 
 web3.eth.getBlock("latest").then(res => console.log(res));
 // Best block info will be displayed
-```
-
-## Current
-
-```
-web3 instance
-├── eth
-│   ├── getBlockNumber
-│   ├── getBlock
-│   ├── getTransaction
-│   ├── sendTransaction
-│   ├── sendSignedTransaction
-│   ├── getChainTag
-│   ├── getBlockRef
-│   ├── getTransactionReceipt
-│   ├── getCode
-│   ├── getBalance
-│   ├── getStorageAt
-│   ├── call
-│   ├── getPastLogs
-│   ├── subscribe
-│   ├── clearSubscriptions
-│   ├── getEnergy
-│   ├── estimateGas
-│   └── Contract
-│       ├── Constructor(new Contract())
-│       ├── clone
-│       ├── deploy
-│       ├── methods
-│       ├── methods.myMethod.call
-│       ├── methods.myMethod.send
-│       ├── methods.myMethod.estimateGas
-│       ├── methods.myMethod.encodeABI
-│       ├── events
-│       ├── once
-│       ├── events.myEvent
-│       ├── events.allEvents
-│       └── getPastEvents
-└── utils
-
 ```
 
 ## RepuCoin
@@ -98,11 +52,10 @@ However, in RepuCoin, the structure is different from Ethereum's and Vechain's b
 ```
 RepuCoin web3 instance
 ├── eth
-│   ├── getKeyblock
-│   ├── getMicroblock
-│   ├── getTransaction
-│   ├── sendTransaction
-│   ├── sendSignedTransaction
+│   ├── getKeyblockByHeight
+│   ├── getKeyblockByHash
+│   ├── getMicroblockByHash
+│   ├── getTransactionByHash
 ```
 
 ## Send Transaction
