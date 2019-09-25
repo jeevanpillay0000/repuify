@@ -11,8 +11,16 @@ export type RPCExecutor = (rpc: JSONRPC, host: string, timeout: number) => Promi
 export const RPCMethodMap = new Map<string, RPCExecutor>()
 const debug = require('debug')('thor:http-provider:rpc')
 
+RPCMethodMap.set('eth_getKeyblockByHeight', async function(rpc: JSONRPC, host: string, timeout: number) {
+    const URL = host + '/keyblocks/' + utils.fromETHBlockNumber(rpc.params[0])
+
+    const res = await HTTP.get(URL, timeout).then(HTTPPostProcessor)
+
+    return rpc.makeResult(res)
+})
+
 RPCMethodMap.set('eth_getKeyblockByHash', async function(rpc: JSONRPC, host: string, timeout: number) {
-    const URL = host + '/keyblocks/' + rpc.params[0]
+    const URL = host + '/blocks/' + rpc.params[0]
 
     const res = await HTTP.get(URL, timeout).then(HTTPPostProcessor)
 
