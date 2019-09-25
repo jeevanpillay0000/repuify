@@ -19,6 +19,13 @@ describe('initialization', () => {
         expect(web3.currentProvider).to.have.property('timeout', 0)
     })
 
+    it('init thorify with timeout', () => {
+        const web3 = new Web3();
+        repuify(web3, 'http://localhost:8669', 10)
+
+        expect(web3.currentProvider).to.have.property('timeout', 10);
+    });
+
     it('providers should be RepuProvider', () => {
         const web3 = new Web3()
         repuify(web3)
