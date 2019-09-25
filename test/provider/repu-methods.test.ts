@@ -75,7 +75,7 @@ describe("rpc methods", () => {
       xhrUtility.setResponse({
         meta: {
           KBHash:
-            "0xa5b3d1dbafe79a41dce8ec33a83e68cf506cdcd1df7776c3afd8fc67a76cecf2",
+            "0xa5b3d1dbafe79a41dce8ec33a83e68cf506cdcd1df7776c3afd8fc67a76cecf2"
         }
       });
 
@@ -85,13 +85,48 @@ describe("rpc methods", () => {
       ]);
 
       const ret = await executor(rpc, host, timeout);
-      expect(ret.result.meta).to.have.property("KBHash", "0xa5b3d1dbafe79a41dce8ec33a83e68cf506cdcd1df7776c3afd8fc67a76cecf2");
+      expect(ret.result.meta).to.have.property(
+        "KBHash",
+        "0xa5b3d1dbafe79a41dce8ec33a83e68cf506cdcd1df7776c3afd8fc67a76cecf2"
+      );
     });
 
     it("return null", async () => {
       const executor = RPCMethodMap.get("eth_getMicroblockByHash");
       const rpc = makeRPCRequest("eth_getMicroblockByHash", [
-          "0xa5b3d1dbafe79a41dce8ec33a83e68cf506cdcd1df7776c3afd8fc67a76cecf2"
+        "0xa5b3d1dbafe79a41dce8ec33a83e68cf506cdcd1df7776c3afd8fc67a76cecf2"
+      ]);
+
+      const ret = await executor(rpc, host, timeout);
+      expect(ret.result).to.be.equal(null);
+    });
+  });
+
+  describe("eth_getTransactionByHash", () => {
+    it("valid response", async () => {
+      xhrUtility.setResponse({
+        meta: {
+          amount:
+            100
+        }
+      });
+
+      const executor = RPCMethodMap.get("eth_getTransactionByHash");
+      const rpc = makeRPCRequest("eth_getTransactionByHash", [
+        "0xa5b3d1dbafe79a41dce8ec33a83e68cf506cdcd1df7776c3afd8fc67a76cecf2"
+      ]);
+
+      const ret = await executor(rpc, host, timeout);
+      expect(ret.result.meta).to.have.property(
+        "amount",
+        100
+      );
+    });
+
+    it("return null", async () => {
+      const executor = RPCMethodMap.get("eth_getTransactionByHash");
+      const rpc = makeRPCRequest("eth_getTransactionByHash", [
+        "0xa5b3d1dbafe79a41dce8ec33a83e68cf506cdcd1df7776c3afd8fc67a76cecf2"
       ]);
 
       const ret = await executor(rpc, host, timeout);

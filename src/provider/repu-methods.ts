@@ -34,3 +34,17 @@ RPCMethodMap.set('eth_getMicroblockByHash', async function(rpc: JSONRPC, host: s
 
     return rpc.makeResult(res)
 })
+
+RPCMethodMap.set('eth_getTransactionByHash', async function(rpc: JSONRPC, host: string, timeout: number) {
+    const URL = host + '/transactions/' + rpc.params[0]
+
+    const res = await HTTP.get(URL, timeout).then(HTTPPostProcessor)
+
+    if (!res) {
+        return rpc.makeResult(null)
+    }
+
+    // TODO: link to microblock
+    // res.microblockHash = res.meta.microblockHash
+    return rpc.makeResult(res)
+})
