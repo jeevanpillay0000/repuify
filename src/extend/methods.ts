@@ -5,8 +5,15 @@ const extendMethods = function(web3: any) {
         property: 'eth',
         methods: [
             new web3.extend.Method({
-                name: 'getKeyblock',
+                name: 'getKeyblockByHash',
                 call: 'eth_getKeyblockByHash',
+                params: 1,
+                inputFormatter: [null],
+                outputFormatter: [null],
+            }),
+            new web3.extend.Method({
+                name: 'getKeyblockByHeight',
+                call: 'eth_getKeyblockByHeight',
                 params: 1,
                 inputFormatter: [null],
                 outputFormatter: [null],
@@ -17,13 +24,6 @@ const extendMethods = function(web3: any) {
                 params: 1,
                 inputFormatter: [null],
                 outputFormatter: web3.extend.formatters.outputTransactionFormatter,
-            }),
-            new web3.extend.Method({
-                name: 'sendTransaction',
-                call: 'eth_sendTransaction',
-                accounts: web3.eth.accounts,
-                params: 1,
-                inputFormatter: [web3.extend.formatters.inputTransactionFormatter],
             })
         ],
     });
