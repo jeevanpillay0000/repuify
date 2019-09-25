@@ -6,11 +6,12 @@ import { JSONRPC, RPCResult } from './json-rpc'
 import { HTTP } from '../utils/simple-http'
 import { HTTPPostProcessor } from '../utils/http-processor';
 
+// debug
+const debug = require('debug')('repu:http-provider:rpc')
+
 // RPC
 export type RPCExecutor = (rpc: JSONRPC, host: string, timeout: number) => Promise<RPCResult>
 export const RPCMethodMap = new Map<string, RPCExecutor>()
-const debug = require('debug')('repu:http-provider:rpc')
-
 RPCMethodMap.set('eth_getKeyblockByHeight', async function(rpc: JSONRPC, host: string, timeout: number) {
     const URL = host + '/keyblocks/' + utils.fromETHBlockNumber(rpc.params[0])
 

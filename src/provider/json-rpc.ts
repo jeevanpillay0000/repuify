@@ -74,33 +74,4 @@ export class JSONRPC {
             },
         }
     }
-
-    public makeSubResult(result: any): RPCSubResult {
-        return {
-            id: this.id,
-            jsonrpc: '2.0',
-            method: this.method,
-            params: {
-                result: {
-                    data: repuifyResult(result),
-                },
-                subscription: this.id,
-            },
-        }
-    }
-
-    public makeSubError(error: any): RPCSubResult {
-        return {
-            id: this.id,
-            jsonrpc: '2.0',
-            method: this.method,
-            params: {
-                result: {
-                    error,
-                },
-                subscription: this.id,
-            },
-        }
-    }
-
 }
